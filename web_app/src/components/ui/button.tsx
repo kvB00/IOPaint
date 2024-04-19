@@ -125,6 +125,31 @@ const ImageUploadButton = (props: UploadButtonProps) => {
   )
 }
 
-export { Button, IconButton, ImageUploadButton, buttonVariants }
+// ERASER TOOL INTERACTION AND ACCESS
+const EraserButton = (props: IconButtonProps) => {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          {...props}
+          tabIndex={-1}
+          className="cursor-default bg-background"
+        >
+          {/* Replace the content with your eraser icon */}
+          <div className="eraser-button-icon-wrapper">Eraser</div>
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>{props.tooltip}</p>
+      </TooltipContent>
+    </Tooltip>
+  )
+}
+// END TOOL ADDITION 
+
+// ADD EraserButton
+export { Button, IconButton, ImageUploadButton, EraserButton, buttonVariants }
 
 //Check
