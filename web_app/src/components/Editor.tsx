@@ -70,6 +70,7 @@ export default function Editor(props: EditorProps) {
     updateAppState,
     runMannually,
     runInpainting,
+    eraserBrush, // ERASER BRUSH ADD
     isCropperExtenderResizing,
     decreaseBaseBrushSize,
     increaseBaseBrushSize,
@@ -95,6 +96,7 @@ export default function Editor(props: EditorProps) {
     state.updateAppState,
     state.runMannually(),
     state.runInpainting,
+    state.eraserBrush, // ERASER BRUSH ADD 
     state.isCropperExtenderResizing,
     state.decreaseBaseBrushSize,
     state.increaseBaseBrushSize,
