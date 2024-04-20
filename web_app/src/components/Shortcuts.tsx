@@ -17,7 +17,8 @@ interface ShortcutProps {
 
 function ShortCut(props: ShortcutProps) {
   const { content, keys } = props
-
+  
+    // Displaying shortcut content and keys in a flex layout
   return (
     <div className="flex justify-between">
       <div>{content}</div>
@@ -43,11 +44,13 @@ const CmdOrCtrl = () => {
 
 export function Shortcuts() {
   const [open, toggleOpen] = useToggle(false)
-
+  
+  // Triggering dialog open/close with the 'h' hotkey
   useHotKey("h", () => {
     toggleOpen()
   })
 
+  // Dialog component with open state managed by useToggle
   return (
     <Dialog open={open} onOpenChange={toggleOpen}>
       <DialogTrigger asChild>
