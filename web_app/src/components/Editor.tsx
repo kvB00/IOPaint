@@ -1,3 +1,4 @@
+// Import statements
 import { SyntheticEvent, useCallback, useEffect, useRef, useState } from "react"
 import { CursorArrowRaysIcon } from "@heroicons/react/24/outline"
 import { useToast } from "@/components/ui/use-toast"
@@ -32,17 +33,21 @@ import useHotKey from "@/hooks/useHotkey"
 import Extender from "./Extender"
 import { MAX_BRUSH_SIZE, MIN_BRUSH_SIZE } from "@/lib/const"
 
+// Constants
 const TOOLBAR_HEIGHT = 200
 const COMPARE_SLIDER_DURATION_MS = 300
 
+// Interface for EditorProps
 interface EditorProps {
   file: File
 }
 
+// Editor Component, Destructure props, and UseToast hook
 export default function Editor(props: EditorProps) {
   const { file } = props
   const { toast } = useToast()
 
+  // State and store variables
   const [
     disableShortCuts,
     windowSize,
@@ -65,6 +70,7 @@ export default function Editor(props: EditorProps) {
     updateAppState,
     runMannually,
     runInpainting,
+    eraserBrush, // ERASER BRUSH ADD
     isCropperExtenderResizing,
     decreaseBaseBrushSize,
     increaseBaseBrushSize,
@@ -90,6 +96,7 @@ export default function Editor(props: EditorProps) {
     state.updateAppState,
     state.runMannually(),
     state.runInpainting,
+    state.eraserBrush, // ERASER BRUSH ADD 
     state.isCropperExtenderResizing,
     state.decreaseBaseBrushSize,
     state.increaseBaseBrushSize,
@@ -130,7 +137,7 @@ export default function Editor(props: EditorProps) {
   const hadDrawSomething = useCallback(() => {
     return curLineGroup.length !== 0
   }, [curLineGroup])
-
+// Function used to detect if something has been drawn
   useEffect(() => {
     if (
       !imageContext ||
