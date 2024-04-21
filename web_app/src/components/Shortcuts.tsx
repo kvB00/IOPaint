@@ -1,6 +1,7 @@
+//Shortcuts.tsx
 import { Keyboard } from "lucide-react"
 import { IconButton } from "@/components/ui/button"
-import { useToggle } from "@uidotdev/usehooks"
+//import { useToggle } from "@uidotdev/usehooks"
 import {
   Dialog,
   DialogContent,

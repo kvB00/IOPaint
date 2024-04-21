@@ -10,3 +10,8 @@ IOPaint.egg-info/
 venv/
 tmp/
 iopaint/web_app/
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

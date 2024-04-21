@@ -1,7 +1,7 @@
-// Shortcuts.test.js
-
+// Shortcuts.test.jsx
+import '@testing-library/jest-dom'
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import Shortcuts from './Shortcuts'; // Assuming this is the JSX file you want to test
 
 describe('Shortcuts', () => {

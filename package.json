@@ -1,19 +1,27 @@
 {
   "dependencies": {
-    "D": "^1.0.0"
+    "D": "^1.0.0",
+    "lucide-react": "^0.372.0"
   },
   "name": "iopaint",
   "description": "<h1 align=\"center\">IOPaint</h1>\r <p align=\"center\">A free and open-source inpainting & outpainting tool powered by SOTA AI model.</p>",
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
+    "@babel/core": "^7.24.4",
     "@babel/preset-env": "^7.24.4",
     "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
     "@jest/globals": "^29.7.0",
+    "@playwright/test": "^1.43.1",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^15.0.2",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.12.7",
+    "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "react-test-renderer": "^18.2.0",
     "ts-jest": "^29.1.2"
   },
   "scripts": {
