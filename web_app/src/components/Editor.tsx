@@ -357,7 +357,7 @@ export default function Editor(props: EditorProps) {
     resetZoom,
     // drawOnCurrentRender,
   ])
-
+  // Handles the movement of the brush in relation to the mouse
   const handleBrushMouseMove = (coords: { x: number; y: number }) => {
     if (!isDraging) return;
     if (!context || !canvasRef.current) return;
