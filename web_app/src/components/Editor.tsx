@@ -62,6 +62,7 @@ export default function Editor(props: EditorProps) {
     updateInteractiveSegState,
     handleCanvasMouseDown,
     handleCanvasMouseMove,
+    handleBrushMouseMove,
     undo,
     redo,
     undoDisabled,
@@ -87,6 +88,7 @@ export default function Editor(props: EditorProps) {
     state.updateInteractiveSegState,
     state.handleCanvasMouseDown,
     state.handleCanvasMouseMove,
+    state.handleBrushMouseMove,
     state.undo,
     state.redo,
     state.undoDisabled(),
@@ -357,7 +359,7 @@ export default function Editor(props: EditorProps) {
     resetZoom,
     // drawOnCurrentRender,
   ])
-
+  // Handles the movement of the brush in relation to the mouse
   const handleBrushMouseMove = (coords: { x: number; y: number }) => {
     if (!isDraging) return;
     if (!context || !canvasRef.current) return;
