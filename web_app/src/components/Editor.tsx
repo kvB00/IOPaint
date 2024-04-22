@@ -440,7 +440,7 @@ export default function Editor(props: EditorProps) {
     }
     updateAppState({ isPluginRunning: false })
   }
-
+// Function for pointer events
   const onPointerUp = (ev: SyntheticEvent) => {
     if (isMidClick(ev)) {
       setIsPanning(false)
@@ -476,6 +476,7 @@ export default function Editor(props: EditorProps) {
     }
   }
 
+  // Function to handle mouse events on the canvas
   const onCanvasMouseUp = (ev: SyntheticEvent) => {
     if (isErasing) {
       // Handle eraser tool logic
@@ -495,6 +496,7 @@ export default function Editor(props: EditorProps) {
     }
   }
 
+  // Function to handle mouse down events
   const onMouseDown = (ev: SyntheticEvent) => {
     if (isProcessing) {
       return
@@ -529,19 +531,21 @@ export default function Editor(props: EditorProps) {
       setIsDraging(true);
       handleBrushMouseDown(mouseXY(ev));
   }
-
+  // Function to handle the undo action with hotkey
   const handleUndo = (keyboardEvent: KeyboardEvent | SyntheticEvent) => {
     keyboardEvent.preventDefault()
     undo()
   }
   useHotKey("meta+z,ctrl+z", handleUndo)
 
+  // Function to handle the redo action with hotkey
   const handleRedo = (keyboardEvent: KeyboardEvent | SyntheticEvent) => {
     keyboardEvent.preventDefault()
     redo()
   }
   useHotKey("shift+ctrl+z,shift+meta+z", handleRedo)
 
+    // Function to handle Tab key events
   useKeyPressEvent(
     "Tab",
     (ev) => {
@@ -557,6 +561,7 @@ export default function Editor(props: EditorProps) {
       }
     },
     (ev) => {
+      // Prevent default Tab behavior
       ev?.preventDefault()
       ev?.stopPropagation()
       if (hadRunInpainting()) {
@@ -569,7 +574,7 @@ export default function Editor(props: EditorProps) {
       }
     }
   )
-
+  // Function to handle image downloading
   const download = useCallback(async () => {
     if (file === undefined) {
       return
