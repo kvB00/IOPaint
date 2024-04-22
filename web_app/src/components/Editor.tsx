@@ -70,7 +70,6 @@ export default function Editor(props: EditorProps) {
     updateAppState,
     runMannually,
     runInpainting,
-    eraserBrush, // ERASER BRUSH ADD
     isCropperExtenderResizing,
     decreaseBaseBrushSize,
     increaseBaseBrushSize,
@@ -96,11 +95,11 @@ export default function Editor(props: EditorProps) {
     state.updateAppState,
     state.runMannually(),
     state.runInpainting,
-    state.eraserBrush, // ERASER BRUSH ADD 
     state.isCropperExtenderResizing,
     state.decreaseBaseBrushSize,
     state.increaseBaseBrushSize,
   ])
+  // Declare and Store Variables
   const baseBrushSize = useStore((state) => state.editorState.baseBrushSize)
   const brushSize = useStore((state) => state.getBrushSize())
   const renders = useStore((state) => state.editorState.renders)
@@ -133,7 +132,7 @@ export default function Editor(props: EditorProps) {
   const [sliderPos, setSliderPos] = useState<number>(0)
   const [isChangingBrushSizeByWheel, setIsChangingBrushSizeByWheel] =
     useState<boolean>(false)
-
+// Checks to see if something has been drawn
   const hadDrawSomething = useCallback(() => {
     return curLineGroup.length !== 0
   }, [curLineGroup])
@@ -167,6 +166,7 @@ export default function Editor(props: EditorProps) {
     imageWidth,
   ])
 
+  // Effect to update the canvas when needed
   useEffect(() => {
     if (
       !context ||
@@ -209,7 +209,7 @@ export default function Editor(props: EditorProps) {
     imageHeight,
     imageWidth,
   ])
-
+// Function that gets the Current Render
   const getCurrentRender = useCallback(async () => {
     let targetFile = file
     if (renders.length > 0) {
@@ -219,10 +219,11 @@ export default function Editor(props: EditorProps) {
     return targetFile
   }, [file, renders])
 
+  // Checks if inpainting has happened
   const hadRunInpainting = () => {
     return renders.length !== 0
   }
-
+// Gathers the current width and height of the image
   const getCurrentWidthHeight = useCallback(() => {
     let width = 512
     let height = 512
@@ -240,7 +241,7 @@ export default function Editor(props: EditorProps) {
     return [width, height]
   }, [original, isOriginalLoaded, renders])
 
-  // Draw once the original image is loaded
+  // Function that draws once the original image is loaded
   useEffect(() => {
     if (!isOriginalLoaded) {
       return
@@ -250,7 +251,7 @@ export default function Editor(props: EditorProps) {
     if (width !== imageWidth || height !== imageHeight) {
       setImageSize(width, height)
     }
-
+    // Calculates the scale based on window size and image dimensions
     const rW = windowSize.width / width
     const rH = (windowSize.height - TOOLBAR_HEIGHT) / height
 
@@ -264,7 +265,7 @@ export default function Editor(props: EditorProps) {
     console.log(
       `[on file load] image size: ${width}x${height}, scale: ${s}, initialCentered: ${initialCentered}`
     )
-
+    // Checks on canvas dimensions
     if (context?.canvas) {
       console.log("[on file load] set canvas size")
       if (width != context.canvas.width) {
@@ -274,9 +275,8 @@ export default function Editor(props: EditorProps) {
         context.canvas.height = height
       }
     }
-
+  // Checks to see if image was not originally centered
     if (!initialCentered) {
-      // 防止每次擦除以后图片 zoom 还原
       viewportRef.current?.centerView(s, 1)
       console.log("[on file load] centerView")
       setInitialCentered(true)
@@ -292,9 +292,9 @@ export default function Editor(props: EditorProps) {
     getCurrentWidthHeight,
   ])
 
+  // Effect to center view when dimensions change
   useEffect(() => {
     console.log("[useEffect] centerView")
-    // render 改变尺寸以后，undo/redo 重新 center
     viewportRef?.current?.centerView(minScale, 1)
   }, [imageHeight, imageWidth, viewportRef, minScale])
 
@@ -313,7 +313,7 @@ export default function Editor(props: EditorProps) {
     if (viewport.instance.transformState.scale) {
       viewport.instance.transformState.scale = minScale
     }
-
+    // Sets the scale of the image
     setScale(minScale)
     setPanned(false)
   }, [
@@ -325,6 +325,7 @@ export default function Editor(props: EditorProps) {
     minScale,
   ])
 
+  // Effect that handles window resizing and zoom reset
   useEffect(() => {
     window.addEventListener("resize", () => {
       resetZoom()
@@ -336,6 +337,7 @@ export default function Editor(props: EditorProps) {
     }
   }, [windowSize, resetZoom])
 
+  // Function to see when Escape has been pressed
   const handleEscPressed = () => {
     if (isProcessing) {
       return
@@ -347,7 +349,7 @@ export default function Editor(props: EditorProps) {
       resetZoom()
     }
   }
-
+  // Hook to handle Escape key press
   useHotKey("Escape", handleEscPressed, [
     isDraging,
     isInpainting,
