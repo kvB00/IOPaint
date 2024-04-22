@@ -153,9 +153,8 @@ const EraserButton = (props: IconButtonProps) => {
     </Tooltip>
   )
 }
-// END TOOL ADDITION 
 
 // ADD EraserButton
 export { Button, IconButton, ImageUploadButton, EraserButton, buttonVariants }
 
-//Check
+
