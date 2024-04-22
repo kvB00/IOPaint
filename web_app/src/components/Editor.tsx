@@ -357,11 +357,12 @@ export default function Editor(props: EditorProps) {
     // drawOnCurrentRender,
   ])
 
+    // Function that handles mouse movement
   const onMouseMove = (ev: SyntheticEvent) => {
     const mouseEvent = ev.nativeEvent as MouseEvent
     setCoords({ x: mouseEvent.pageX, y: mouseEvent.pageY })
   }
-
+  // Function  that handles mouse dragging
   const onMouseDrag = (ev: SyntheticEvent) => {
     if (isProcessing) {
       return
@@ -379,10 +380,11 @@ export default function Editor(props: EditorProps) {
     if (curLineGroup.length === 0) {
       return
     }
-
-    handleCanvasMouseMove(mouseXY(ev))
+    // Handles canvas mouse movement
+    handleCanvasMouseMove(mouseXY(ev)) 
   }
 
+  // Function to run interactive segmentation
   const runInteractiveSeg = async (newClicks: number[][]) => {
     updateAppState({ isPluginRunning: true })
     const targetFile = await getCurrentRender()
