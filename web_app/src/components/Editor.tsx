@@ -410,7 +410,7 @@ export default function Editor(props: EditorProps) {
     }
     updateAppState({ isPluginRunning: false })
   }
-
+  // Function that handles updates to the canvas and to the mouse
   const onPointerUp = (ev: SyntheticEvent) => {
     if (isMidClick(ev)) {
       setIsPanning(false)
