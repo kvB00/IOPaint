@@ -117,6 +117,7 @@ export default function Editor(props: EditorProps) {
   const [showBrush, setShowBrush] = useState(false)
   const [showRefBrush, setShowRefBrush] = useState(false)
   const [isPanning, setIsPanning] = useState<boolean>(false)
+  const [isErasing, setIsErasing] = useState(false);
 
   const [scale, setScale] = useState<number>(1)
   const [panned, setPanned] = useState<boolean>(false)
@@ -357,13 +358,40 @@ export default function Editor(props: EditorProps) {
     // drawOnCurrentRender,
   ])
 
+  const handleBrushMouseMove = (coords: { x: number; y: number }) => {
+    if (!isDraging) return;
+    if (!context || !canvasRef.current) return;
+    const canvas = canvasRef.current;
+    const ctx = context;
+    const { x, y } = coords;
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = x - rect.left;
+    const mouseY = y - rect.top;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.lineTo(mouseX, mouseY);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(mouseX, mouseY);
+  };
+
     // Function that handles mouse movement
   const onMouseMove = (ev: SyntheticEvent) => {
     const mouseEvent = ev.nativeEvent as MouseEvent
     setCoords({ x: mouseEvent.pageX, y: mouseEvent.pageY })
+    if (isErasing && isDraging) {
+      handleEraserMouseMove(mouseXY(ev));
+    } else if (isDraging) { // Otherwise, handle brush tool logic
+      handleBrushMouseMove(mouseXY(ev));
+    }
   }
   // Function  that handles mouse dragging
   const onMouseDrag = (ev: SyntheticEvent) => {
+    if (isErasing) {
+      // Handle eraser tool logic
+    } else {
+      // Handle brush tool logic
+    }
     if (isProcessing) {
       return
     }
@@ -447,6 +475,11 @@ export default function Editor(props: EditorProps) {
   }
 
   const onCanvasMouseUp = (ev: SyntheticEvent) => {
+    if (isErasing) {
+      // Handle eraser tool logic
+    } else {
+      // Handle brush tool logic
+    }
     if (interactiveSegState.isInteractiveSeg) {
       const xy = mouseXY(ev)
       const newClicks: number[][] = [...interactiveSegState.clicks]
@@ -487,8 +520,12 @@ export default function Editor(props: EditorProps) {
       return
     }
 
-    setIsDraging(true)
-    handleCanvasMouseDown(mouseXY(ev))
+    if (isErasing) {
+      setIsDraging(true);
+      handleEraserMouseDown(mouseXY(ev));
+    } else { // Otherwise, handle brush tool logic
+      setIsDraging(true);
+      handleBrushMouseDown(mouseXY(ev));
   }
 
   const handleUndo = (keyboardEvent: KeyboardEvent | SyntheticEvent) => {
