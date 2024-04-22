@@ -25,5 +25,5 @@ describe('Shortcuts', () => {
     expect(queryByText('Hotkeys')).toBeInTheDocument();
   });
 
-  // Add more test cases as needed
+  
 });
