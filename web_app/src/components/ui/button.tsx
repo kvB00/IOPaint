@@ -153,7 +153,29 @@ const EraserButton = (props: IconButtonProps) => {
   )
 }
 
-// ADD EraserButton
+// Add EraserButton
 export { Button, IconButton, ImageUploadButton, EraserButton, buttonVariants }
 
+// Add ImageResolutionButton
+export interface ImageResolutionButtonProps extends ButtonProps {
+  onResolutionChange: (resolution: string) => void
+}
 
+const ImageResolutionButton = (props: ImageResolutionButtonProps) => {
+  const { onResolutionChange, children, ...rest } = props;
+
+  const handleChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedResolution = ev.currentTarget.value;
+    onResolutionChange(selectedResolution);
+  };
+
+  return (
+    <select onChange={handleChange} {...rest}>
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
+  );
+};
+
+export { ImageResolutionButton };
