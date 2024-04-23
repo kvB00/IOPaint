@@ -143,8 +143,7 @@ const EraserButton = (props: IconButtonProps) => {
           tabIndex={-1}
           className="cursor-default bg-background"
         >
-          {/* Replace the content with your eraser icon */}
-          <div className="eraser-button-icon-wrapper">Eraser</div>
+          <div className="eraser-button-icon-wrapper">{Eraser}</div>
         </Button>
       </TooltipTrigger>
       <TooltipContent>
