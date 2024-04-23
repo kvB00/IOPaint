@@ -377,6 +377,47 @@ export default function Editor(props: EditorProps) {
     ctx.moveTo(mouseX, mouseY);
   };
 
+  // Function that we made that implements the image resolution
+import React, { useState } from "react";
+import { ImageResolutionButton } from "./ButtonComponents";
+
+const Editor: React.FC = () => {
+  // Constants for image resolution
+  const [imageResolution, setImageResolution] = useState<string>("medium");
+
+ // Handle image resolution change
+const handleResolutionChange = (resolution: string) => {
+  setImageResolution(resolution);
+  // Additional logic based on the new resolution
+  if (resolution === "low") {
+    // Fetch low-resolution images
+  } else if (resolution === "medium") {
+    // Fetch medium-resolution images
+  } else if (resolution === "high") {
+    // Fetch high-resolution images
+  }
+};
+
+
+  return (
+    <div>
+      {/* Render the ImageResolutionButton */}
+      <ImageResolutionButton
+        onResolutionChange={handleResolutionChange}
+        value={imageResolution}
+      >
+        Change Resolution
+      </ImageResolutionButton>
+      {/* Display current image resolution */}
+      <p>Current Image Resolution: {imageResolution}</p>
+      {/* Other editor components */}
+    </div>
+  );
+};
+
+export default Editor;
+
+
     // Function that handles mouse movement
   const onMouseMove = (ev: SyntheticEvent) => {
     const mouseEvent = ev.nativeEvent as MouseEvent
