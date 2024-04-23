@@ -399,25 +399,6 @@ const handleResolutionChange = (resolution: string) => {
 };
 
 
-  return (
-    <div>
-      {/* Render the ImageResolutionButton */}
-      <ImageResolutionButton
-        onResolutionChange={handleResolutionChange}
-        value={imageResolution}
-      >
-        Change Resolution
-      </ImageResolutionButton>
-      {/* Display current image resolution */}
-      <p>Current Image Resolution: {imageResolution}</p>
-      {/* Other editor components */}
-    </div>
-  );
-};
-
-export default Editor;
-
-
     // Function that handles mouse movement
   const onMouseMove = (ev: SyntheticEvent) => {
     const mouseEvent = ev.nativeEvent as MouseEvent
